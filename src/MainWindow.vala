@@ -746,7 +746,6 @@ namespace PantheonCalculator {
         private void action_clear () {
             position = 0;
             entry.set_text ("");
-            set_focus (entry);
             remove_error ();
 
             entry.set_position (position);
