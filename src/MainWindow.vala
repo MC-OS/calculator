@@ -139,7 +139,9 @@ namespace PantheonCalculator {
             };
             headerbar.pack_end (button_extended);
             headerbar.pack_end (button_history);
+            headerbar.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
             headerbar.get_style_context ().add_class ("default-decoration");
+            headerbar.get_style_context ().add_class ("titlebar");
 
             entry = new Gtk.Entry () {
                 xalign = 1,
@@ -148,6 +150,7 @@ namespace PantheonCalculator {
                 valign = Gtk.Align.FILL
             };
             entry.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
+            entry.set_placeholder_text("0");
 
             button_calc = new Button ("=") {
                 tooltip_text = _("Calculate Result")
