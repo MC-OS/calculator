@@ -132,16 +132,14 @@ namespace PantheonCalculator {
             };
             button_history.clicked.connect (show_history);
 
-            var headerbar = new Gtk.HeaderBar () {
+            var headerbar = new Hdy.HeaderBar () {
                 has_subtitle = false,
                 show_close_button = true,
                 title = _("Calculator")
             };
             headerbar.pack_end (button_extended);
             headerbar.pack_end (button_history);
-            headerbar.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
             headerbar.get_style_context ().add_class ("default-decoration");
-            headerbar.get_style_context ().add_class ("titlebar");
 
             entry = new Gtk.Entry () {
                 xalign = 1,
