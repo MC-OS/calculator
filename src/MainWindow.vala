@@ -927,7 +927,6 @@ namespace PantheonCalculator {
                         if (entry.get_text () != output) {
                             clipboard.set_text (output, entry.get_text_length ());
                             clipboard.store ();
-
                         }
                     }
                     return true;
