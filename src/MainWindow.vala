@@ -22,11 +22,33 @@ namespace PantheonCalculator {
     public class MainWindow : Hdy.ApplicationWindow {
         private uint configure_id;
         private static GLib.Settings settings;
+        public Gtk.Clipboard clipboard;
 
         private Gtk.Revealer extended_revealer;
         private Gtk.Entry entry;
         private Gtk.Image extended_img_1;
         private Gtk.Image extended_img_2;
+        private Button button_0;
+        private Button button_1;
+        private Button button_2;
+        private Button button_3;
+        private Button button_4;
+        private Button button_5;
+        private Button button_6;
+        private Button button_7;
+        private Button button_8;
+        private Button button_9;
+        private Button button_add;
+        private Button button_sub;
+        private Button button_mult;
+        private Button button_div;
+        private Button button_point;
+        private Button button_percent;
+        private Button button_clr;
+        private Button button_par_left;
+        private Button button_par_right;
+
+
         private Gtk.Button button_calc;
         private Gtk.Button button_history;
         private Gtk.Button button_ans;
@@ -84,6 +106,9 @@ namespace PantheonCalculator {
             history = new List<History?> ();
             position = 0;
 
+            clipboard = Gtk.Clipboard.get_for_display (get_display (), Gdk.SELECTION_CLIPBOARD);
+
+
             int window_x, window_y;
             settings.get ("window-position", "(ii)", out window_x, out window_y);
 
@@ -121,6 +146,7 @@ namespace PantheonCalculator {
             entry = new Gtk.Entry () {
                 xalign = 1,
                 vexpand = true,
+                sensitive = false,
                 valign = Gtk.Align.FILL
             };
             entry.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
@@ -140,7 +166,7 @@ namespace PantheonCalculator {
                 tooltip_text = _("Backspace")
             };
 
-            var button_clr = new Button ("C") {
+            button_clr = new Button ("C") {
                 action_name = ACTION_PREFIX + ACTION_CLEAR
             };
             button_clr.tooltip_markup = Granite.markup_accel_tooltip (
@@ -149,91 +175,91 @@ namespace PantheonCalculator {
             );
             button_clr.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
-            var button_add = new Button (" + ") {
+            button_add = new Button (" + ") {
                 action_name = ACTION_PREFIX + ACTION_INSERT,
                 action_target = new Variant.string ("+"),
                 tooltip_text = _("Add")
             };
             button_add.get_style_context ().add_class (Granite.STYLE_CLASS_H3_LABEL);
 
-            var button_sub = new Button (" − ") {
+            button_sub = new Button (" − ") {
                 action_name = ACTION_PREFIX + ACTION_INSERT,
                 action_target = new Variant.string ("-"),
                 tooltip_text = _("Subtract")
             };
             button_sub.get_style_context ().add_class (Granite.STYLE_CLASS_H3_LABEL);
 
-            var button_mult = new Button (" × ") {
+            button_mult = new Button (" × ") {
                 action_name = ACTION_PREFIX + ACTION_INSERT,
                 action_target = new Variant.string ("×"),
                 tooltip_text = _("Multiply")
             };
             button_mult.get_style_context ().add_class (Granite.STYLE_CLASS_H3_LABEL);
 
-            var button_div = new Button (" ÷ ") {
+            button_div = new Button (" ÷ ") {
                 action_name = ACTION_PREFIX + ACTION_INSERT,
                 action_target = new Variant.string ("÷"),
                 tooltip_text = _("Divide")
             };
             button_div.get_style_context ().add_class (Granite.STYLE_CLASS_H3_LABEL);
 
-            var button_0 = new Button ("0") {
+            button_0 = new Button ("0") {
                 action_name = ACTION_PREFIX + ACTION_INSERT,
                 action_target = new Variant.string ("0")
             };
 
-            var button_point = new Button (Posix.nl_langinfo (Posix.NLItem.RADIXCHAR)) {
+            button_point = new Button (Posix.nl_langinfo (Posix.NLItem.RADIXCHAR)) {
                 action_name = ACTION_PREFIX + ACTION_INSERT,
                 action_target = new Variant.string (Posix.nl_langinfo (Posix.NLItem.RADIXCHAR))
             };
 
-            var button_percent = new Button ("%") {
+            button_percent = new Button ("%") {
                 action_name = ACTION_PREFIX + ACTION_INSERT,
                 action_target = new Variant.string ("%"),
                 tooltip_text = _("Percentage")
             };
 
-            var button_1 = new Button ("1") {
+            button_1 = new Button ("1") {
                 action_name = ACTION_PREFIX + ACTION_INSERT,
                 action_target = new Variant.string ("1")
             };
 
-            var button_2 = new Button ("2") {
+            button_2 = new Button ("2") {
                 action_name = ACTION_PREFIX + ACTION_INSERT,
                 action_target = new Variant.string ("2")
             };
 
-            var button_3 = new Button ("3") {
+            button_3 = new Button ("3") {
                 action_name = ACTION_PREFIX + ACTION_INSERT,
                 action_target = new Variant.string ("3")
             };
 
-            var button_4 = new Button ("4") {
+            button_4 = new Button ("4") {
                 action_name = ACTION_PREFIX + ACTION_INSERT,
                 action_target = new Variant.string ("4")
             };
 
-            var button_5 = new Button ("5") {
+            button_5 = new Button ("5") {
                 action_name = ACTION_PREFIX + ACTION_INSERT,
                 action_target = new Variant.string ("5")
             };
 
-            var button_6 = new Button ("6") {
+            button_6 = new Button ("6") {
                 action_name = ACTION_PREFIX + ACTION_INSERT,
                 action_target = new Variant.string ("6")
             };
 
-            var button_7 = new Button ("7") {
+            button_7 = new Button ("7") {
                 action_name = ACTION_PREFIX + ACTION_INSERT,
                 action_target = new Variant.string ("7")
             };
 
-            var button_8 = new Button ("8") {
+            button_8 = new Button ("8") {
                 action_name = ACTION_PREFIX + ACTION_INSERT,
                 action_target = new Variant.string ("8")
             };
 
-            var button_9 = new Button ("9") {
+            button_9 = new Button ("9") {
                 action_name = ACTION_PREFIX + ACTION_INSERT,
                 action_target = new Variant.string ("9")
             };
@@ -298,13 +324,13 @@ namespace PantheonCalculator {
                 tooltip_text = _("Grand Total")
             };
 
-            var button_par_left = new Button ("(") {
+            button_par_left = new Button ("(") {
                 action_name = ACTION_PREFIX + ACTION_INSERT,
                 action_target = new Variant.string ("("),
                 tooltip_text = _("Start Group")
             };
 
-            var button_par_right = new Button (")") {
+            button_par_right = new Button (")") {
                 action_name = ACTION_PREFIX + ACTION_INSERT,
                 action_target = new Variant.string (")"),
                 tooltip_text = _("End Group")
@@ -483,12 +509,9 @@ namespace PantheonCalculator {
                 );
             });
 
-            entry.grab_focus ();
-
             show_all ();
 
             entry.changed.connect (remove_error);
-            entry.activate.connect (button_calc_clicked);
             entry.insert_text.connect (replace_text);
 
             button_calc.clicked.connect (() => {button_calc_clicked ();});
@@ -540,7 +563,6 @@ namespace PantheonCalculator {
             }
             entry.insert_at_cursor (token);
             new_position += token.char_count ();
-            entry.grab_focus ();
             entry.set_position (new_position);
         }
 
@@ -555,7 +577,6 @@ namespace PantheonCalculator {
                 entry.delete_text (selection_start, selection_end);
                 entry.insert_text (function_call, -1, ref selection_start);
                 new_position += function_call.char_count ();
-                entry.grab_focus ();
                 entry.set_position (new_position);
             } else {
                 activate_action (ACTION_INSERT, variant);
@@ -587,7 +608,6 @@ namespace PantheonCalculator {
                 remove_error ();
             }
 
-            entry.grab_focus ();
             entry.set_position (position);
         }
 
@@ -617,7 +637,6 @@ namespace PantheonCalculator {
                 entry.set_text (new_text);
             }
 
-            entry.grab_focus ();
             entry.set_position (position - 1);
         }
 
@@ -732,7 +751,6 @@ namespace PantheonCalculator {
             set_focus (entry);
             remove_error ();
 
-            entry.grab_focus ();
             entry.set_position (position);
         }
 
@@ -758,7 +776,6 @@ namespace PantheonCalculator {
                 extended_revealer.set_reveal_child (false);
             }
             /* Focusing button_calc because without a new focus it will cause weird window drawing problems. */
-            entry.grab_focus ();
             entry.set_position (position);
         }
 
@@ -788,7 +805,6 @@ namespace PantheonCalculator {
         private void history_added (string input) {
             entry.insert_at_cursor (input);
             position += input.length;
-            entry.grab_focus ();
             entry.set_position (position);
         }
 
@@ -834,6 +850,98 @@ namespace PantheonCalculator {
             });
 
             return base.configure_event (event);
+        }
+
+        public override bool key_press_event (Gdk.EventKey event) {
+            bool control_pressed = ((Gdk.ModifierType.CONTROL_MASK) != 0);
+
+            switch (event.keyval) {
+                case Gdk.Key.@0:
+                    button_0.clicked();
+                    return true;
+                case Gdk.Key.@1:
+                    button_1.clicked();
+                    return true;
+                case Gdk.Key.@2:
+                    button_2.clicked();
+                    return true;
+                case Gdk.Key.@3:
+                    button_3.clicked();
+                    return true;
+                case Gdk.Key.@4:
+                    button_4.clicked();
+                    return true;
+                case Gdk.Key.@5:
+                    button_5.clicked();
+                    return true;
+                case Gdk.Key.@6:
+                    button_6.clicked();
+                    return true;
+                case Gdk.Key.@7:
+                    button_7.clicked();
+                    return true;
+                case Gdk.Key.@8:
+                    button_8.clicked();
+                    return true;
+                case Gdk.Key.@9:
+                    button_9.clicked();
+                    return true;
+                case Gdk.Key.plus:
+                    button_add.clicked();
+                    return true;
+                case Gdk.Key.minus:
+                    button_sub.clicked();
+                    return true;
+                case Gdk.Key.asterisk:
+                    button_mult.clicked();
+                    return true;
+                case Gdk.Key.parenleft:
+                    button_par_left.clicked();
+                    return true;
+                case Gdk.Key.parenright:
+                    button_par_right.clicked();
+                    return true;
+                case Gdk.Key.slash:
+                    button_div.clicked();
+                    return true;
+                case Gdk.Key.period:
+                    button_point.clicked();
+                    return true;
+                case Gdk.Key.percent, Gdk.Key.Arabic_percent:
+                    button_percent.clicked();
+                    return true;
+                case Gdk.Key.Return:
+                    button_calc.clicked();
+                    return true;
+                case Gdk.Key.BackSpace:
+                    button_del.clicked();
+                    return true;
+                case Gdk.Key.X, Gdk.Key.x:
+                    if (control_pressed) {
+                        button_clr.clicked();
+                    }
+                    return true;
+                case Gdk.Key.C, Gdk.Key.c:
+                    if (control_pressed) {
+                    var output = eval.evaluate (entry.get_text (), decimal_places);
+                        if (entry.get_text () != output) {
+                            clipboard.set_text (output, entry.get_text_length ());
+                            clipboard.store ();
+
+                        }
+                    }
+                    return true;
+                case Gdk.Key.V, Gdk.Key.v:
+                    if (control_pressed) {
+                        var output = eval.evaluate (clipboard.wait_for_text (), decimal_places);
+                        if (entry.get_text () != output) {
+                            entry.set_text (output);
+                        }
+                    }
+                    return true;
+                default:
+                    return false;
+            }
         }
     }
 }
