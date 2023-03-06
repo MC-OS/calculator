@@ -938,6 +938,11 @@ namespace PantheonCalculator {
                         }
                     }
                     return true;
+                case Gdk.Key.Q, Gdk.Key.q:
+                    if (control_pressed) {
+                        destroy ();
+                    }
+                    return true;
                 default:
                     return false;
             }
