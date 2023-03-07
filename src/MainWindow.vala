@@ -47,6 +47,22 @@ namespace PantheonCalculator {
         private Button button_clr;
         private Button button_par_left;
         private Button button_par_right;
+        private Button button_pow;
+        private Button button_sr;
+        private Button button_sin;
+        private Button button_sinh;
+        private Button button_cos;
+        private Button button_cosh;
+        private Button button_tan;
+        private Button button_tanh;
+        private Button button_pi;
+        private Button button_e;
+        private Button button_log;
+        private Button button_ln;
+        private Button button_asin;
+        private Button button_acos;
+        private Button button_atan;
+        private Button button_reciprocal;
 
 
         private Gtk.Button button_calc;
@@ -298,7 +314,7 @@ namespace PantheonCalculator {
             basic_grid.attach (button_ans, 2, 5, 1, 1);
             basic_grid.attach (button_calc, 3, 5, 1, 1);
 
-            var button_ms = new Button ("MS") {
+            button_ms = new Button ("MS") {
                 tooltip_text = _("Set memory value")
             };
 
@@ -307,11 +323,11 @@ namespace PantheonCalculator {
                 tooltip_text = _("Recall value from memory")
             };
 
-            var button_m_add = new Button ("M+") {
+            button_m_add = new Button ("M+") {
                 tooltip_text = _("Add to stored value")
             };
 
-            var button_m_sub = new Button ("M−") {
+            button_m_sub = new Button ("M−") {
                 tooltip_text = _("Subtract from stored value")
             };
 
@@ -337,97 +353,97 @@ namespace PantheonCalculator {
                 tooltip_text = _("End Group")
             };
 
-            var button_pow = new Button ("x<sup>y</sup>") {
+            button_pow = new Button ("x<sup>y</sup>") {
                 action_name = ACTION_PREFIX + ACTION_INSERT,
                 action_target = new Variant.string ("^"),
                 tooltip_text = _("Exponent")
             };
 
-            var button_sr = new Button ("√") {
+            button_sr = new Button ("√") {
                 action_name = ACTION_PREFIX + ACTION_FUNCTION,
                 action_target = new Variant.string ("√"),
                 tooltip_text = _("Root")
             };
 
-            var button_sin = new Button ("sin") {
+            button_sin = new Button ("sin") {
                 action_name = ACTION_PREFIX + ACTION_FUNCTION,
                 action_target = new Variant.string ("sin"),
                 tooltip_text = _("Sine")
             };
 
-            var button_sinh = new Button ("sinh") {
+            button_sinh = new Button ("sinh") {
                 action_name = ACTION_PREFIX + ACTION_FUNCTION,
                 action_target = new Variant.string ("sinh"),
                 tooltip_text = _("Hyperbolic Sine")
             };
 
-            var button_cos = new Button ("cos") {
+            button_cos = new Button ("cos") {
                 action_name = ACTION_PREFIX + ACTION_FUNCTION,
                 action_target = new Variant.string ("cos"),
                 tooltip_text = _("Cosine")
             };
 
-            var button_cosh = new Button ("cosh") {
+            button_cosh = new Button ("cosh") {
                 action_name = ACTION_PREFIX + ACTION_FUNCTION,
                 action_target = new Variant.string ("cosh"),
                 tooltip_text = _("Hyperbolic Cosine")
             };
 
-            var button_tan = new Button ("tan") {
+            button_tan = new Button ("tan") {
                 action_name = ACTION_PREFIX + ACTION_FUNCTION,
                 action_target = new Variant.string ("tan"),
                 tooltip_text = _("Tangent")
             };
 
-            var button_tanh = new Button ("tanh") {
+            button_tanh = new Button ("tanh") {
                 action_name = ACTION_PREFIX + ACTION_FUNCTION,
                 action_target = new Variant.string ("tanh"),
                 tooltip_text = _("Hyperbolic Tangent")
             };
 
-            var button_pi = new Button ("π") {
+            button_pi = new Button ("π") {
                 action_name = ACTION_PREFIX + ACTION_INSERT,
                 action_target = new Variant.string ("π"),
                 tooltip_text = _("Pi")
             };
 
-            var button_e = new Button ("e") {
+            button_e = new Button ("e") {
                 action_name = ACTION_PREFIX + ACTION_INSERT,
                 action_target = new Variant.string ("e"),
                 tooltip_text = _("Euler's Number")
             };
 
-            var button_log = new Button ("log<sub>10</sub>") {
+            button_log = new Button ("log<sub>10</sub>") {
                 action_name = ACTION_PREFIX + ACTION_FUNCTION,
                 action_target = new Variant.string ("log"),
                 tooltip_text = _("Logarithm Base 10")
             };
 
-            var button_ln = new Button ("ln") {
+            button_ln = new Button ("ln") {
                 action_name = ACTION_PREFIX + ACTION_FUNCTION,
                 action_target = new Variant.string ("ln"),
                 tooltip_text = _("Natural Logarithm")
             };
 
-            var button_asin = new Button ("sin<sup>-1</sup>") {
+            button_asin = new Button ("sin<sup>-1</sup>") {
                 action_name = ACTION_PREFIX + ACTION_FUNCTION,
                 action_target = new Variant.string ("asin"),
                 tooltip_text = _("Inverse Sine")
             };
 
-            var button_acos = new Button ("cos<sup>-1</sup>") {
+            button_acos = new Button ("cos<sup>-1</sup>") {
                 action_name = ACTION_PREFIX + ACTION_FUNCTION,
                 action_target = new Variant.string ("acos"),
                 tooltip_text = _("Inverse Cosine")
             };
 
-            var button_atan = new Button ("tan<sup>-1</sup>") {
+            button_atan = new Button ("tan<sup>-1</sup>") {
                 action_name = ACTION_PREFIX + ACTION_FUNCTION,
                 action_target = new Variant.string ("atan"),
                 tooltip_text = _("Inverse Tangent")
             };
 
-            var button_reciprocal = new Button ("x<sup>-1</sup>") {
+            button_reciprocal = new Button ("x<sup>-1</sup>") {
                 tooltip_text = _("Reciprocal")
             };
 
