@@ -63,7 +63,9 @@ namespace PantheonCalculator {
         private Button button_acos;
         private Button button_atan;
         private Button button_reciprocal;
-
+        private Button button_ms;
+        private Button button_m_add;
+        private Button button_m_sub;
 
         private Gtk.Button button_calc;
         private Gtk.Button button_history;
@@ -873,43 +875,77 @@ namespace PantheonCalculator {
 
             switch (event.keyval) {
                 case Gdk.Key.@0:
+                case Gdk.Key.KP_0:
                     button_0.clicked();
                     return true;
                 case Gdk.Key.@1:
+                case Gdk.Key.KP_1:
                     button_1.clicked();
                     return true;
                 case Gdk.Key.@2:
+                case Gdk.Key.KP_2:
                     button_2.clicked();
                     return true;
                 case Gdk.Key.@3:
+                case Gdk.Key.KP_3:
                     button_3.clicked();
                     return true;
                 case Gdk.Key.@4:
+                case Gdk.Key.KP_4:
                     button_4.clicked();
                     return true;
                 case Gdk.Key.@5:
+                case Gdk.Key.KP_5:
                     button_5.clicked();
                     return true;
                 case Gdk.Key.@6:
+                case Gdk.Key.KP_6:
                     button_6.clicked();
                     return true;
                 case Gdk.Key.@7:
+                case Gdk.Key.KP_7:
                     button_7.clicked();
                     return true;
                 case Gdk.Key.@8:
+                case Gdk.Key.KP_8:
                     button_8.clicked();
                     return true;
                 case Gdk.Key.@9:
+                case Gdk.Key.KP_9:
                     button_9.clicked();
                     return true;
                 case Gdk.Key.plus:
+                case Gdk.Key.KP_Add:
                     button_add.clicked();
                     return true;
                 case Gdk.Key.minus:
+                case Gdk.Key.KP_Subtract:
                     button_sub.clicked();
                     return true;
                 case Gdk.Key.asterisk:
+                case Gdk.Key.KP_Multiply:
                     button_mult.clicked();
+                    return true;
+                case Gdk.Key.slash:
+                case Gdk.Key.KP_Divide:
+                    button_div.clicked();
+                    return true;
+                case Gdk.Key.period:
+                case Gdk.Key.decimalpoint:
+                case Gdk.Key.KP_Decimal:
+                    button_point.clicked();
+                    return true;
+                case Gdk.Key.BackSpace:
+                case Gdk.Key.KP_Delete:
+                    button_del.clicked();
+                    return true;
+                case Gdk.Key.Return:
+                case Gdk.Key.KP_Enter:
+                case Gdk.Key.KP_Equal:
+                    button_calc.clicked();
+                    return true;
+                case Gdk.Key.percent:
+                    button_percent.clicked();
                     return true;
                 case Gdk.Key.parenleft:
                     button_par_left.clicked();
@@ -917,29 +953,29 @@ namespace PantheonCalculator {
                 case Gdk.Key.parenright:
                     button_par_right.clicked();
                     return true;
-                case Gdk.Key.slash:
-                    button_div.clicked();
-                    return true;
-                case Gdk.Key.period:
-                    button_point.clicked();
-                    return true;
-                case Gdk.Key.percent, Gdk.Key.Arabic_percent:
-                    button_percent.clicked();
-                    return true;
-                case Gdk.Key.Return:
-                    button_calc.clicked();
-                    return true;
-                case Gdk.Key.BackSpace:
-                    button_del.clicked();
-                    return true;
                 case Gdk.Key.X, Gdk.Key.x:
                     if (control_pressed) {
                         button_clr.clicked();
                     }
                     return true;
-                case Gdk.Key.C, Gdk.Key.c:
+                case Gdk.Key.e:
                     if (control_pressed) {
+                        button_pow.clicked();
+                    }
+                    return true;
+                case Gdk.Key.p:
+                    if (control_pressed) {
+                        button_pi.clicked();
+                    }
+                    return true;
+                case Gdk.Key.r:
+                    if (control_pressed) {
+                        button_sr.clicked();
+                    }
+                    return true;
+                case Gdk.Key.C, Gdk.Key.c:
                     var output = eval.evaluate (entry.get_text (), decimal_places);
+                    if (control_pressed) {
                         if (entry.get_text () != output) {
                             clipboard.set_text (output, entry.get_text_length ());
                             clipboard.store ();
@@ -947,8 +983,8 @@ namespace PantheonCalculator {
                     }
                     return true;
                 case Gdk.Key.V, Gdk.Key.v:
+                    var output = eval.evaluate (clipboard.wait_for_text (), decimal_places);
                     if (control_pressed) {
-                        var output = eval.evaluate (clipboard.wait_for_text (), decimal_places);
                         if (entry.get_text () != output) {
                             entry.set_text (output);
                         }
