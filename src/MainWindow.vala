@@ -944,6 +944,9 @@ namespace PantheonCalculator {
                 case Gdk.Key.KP_Equal:
                     button_calc.clicked();
                     return true;
+            }
+
+            switch (event.keyval) {
                 case Gdk.Key.percent:
                     button_percent.clicked();
                     return true;
@@ -953,51 +956,50 @@ namespace PantheonCalculator {
                 case Gdk.Key.parenright:
                     button_par_right.clicked();
                     return true;
-                case Gdk.Key.X, Gdk.Key.x:
-                    if (control_pressed) {
-                        button_clr.clicked();
-                    }
-                    return true;
-                case Gdk.Key.e:
-                    if (control_pressed) {
-                        button_pow.clicked();
-                    }
-                    return true;
-                case Gdk.Key.p:
-                    if (control_pressed) {
-                        button_pi.clicked();
-                    }
-                    return true;
-                case Gdk.Key.r:
-                    if (control_pressed) {
-                        button_sr.clicked();
-                    }
-                    return true;
-                case Gdk.Key.C, Gdk.Key.c:
-                    var output = eval.evaluate (entry.get_text (), decimal_places);
-                    if (control_pressed) {
-                        if (entry.get_text () != output) {
-                            clipboard.set_text (output, entry.get_text_length ());
-                            clipboard.store ();
-                        }
-                    }
-                    return true;
-                case Gdk.Key.V, Gdk.Key.v:
-                    var output = eval.evaluate (clipboard.wait_for_text (), decimal_places);
-                    if (control_pressed) {
-                        if (entry.get_text () != output) {
-                            entry.set_text (output);
-                        }
-                    }
-                    return true;
-                case Gdk.Key.Q, Gdk.Key.q:
-                    if (control_pressed) {
-                        destroy ();
-                    }
-                    return true;
-                default:
-                    return false;
             }
+
+            if (control_pressed) {
+                switch (event.keyval) {
+                    case Gdk.Key.Escape:
+                        if (control_pressed) {
+                            button_clr.clicked();
+                        }
+                        return true;
+                    case Gdk.Key.e:
+                        button_pow.clicked();
+                        return true;
+                    case Gdk.Key.p:
+                        button_pi.clicked();
+                        return true;
+                    case Gdk.Key.r:
+                        button_sr.clicked();
+                        return true;
+                    case Gdk.Key.C, Gdk.Key.c:
+                        if (entry.get_text () != "") {
+                            try {
+                                var output = eval.evaluate (entry.get_text (), decimal_places);
+                                entry.set_text (output);
+                            } catch (Core.OUT_ERROR e) {
+                                infobar_label.label = e.message;
+                                infobar.revealed = true;
+                            }
+                        }
+                        return true;
+                    case Gdk.Key.V, Gdk.Key.v:
+                        try {
+                            var output = eval.evaluate (clipboard.wait_for_text (), decimal_places);
+                            entry.set_text (output);
+                        } catch (Core.OUT_ERROR e) {
+                            infobar_label.label = e.message;
+                            infobar.revealed = true;
+                        }
+                        return true;
+                    case Gdk.Key.Q, Gdk.Key.q:
+                        destroy ();
+                        return true;
+                }
+            }
+            return false;
         }
     }
 }
