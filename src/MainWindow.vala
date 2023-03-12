@@ -876,85 +876,85 @@ namespace PantheonCalculator {
             switch (event.keyval) {
                 case Gdk.Key.@0:
                 case Gdk.Key.KP_0:
-                    button_0.clicked();
+                    button_0.activate();
                     return true;
                 case Gdk.Key.@1:
                 case Gdk.Key.KP_1:
-                    button_1.clicked();
+                    button_1.activate();
                     return true;
                 case Gdk.Key.@2:
                 case Gdk.Key.KP_2:
-                    button_2.clicked();
+                    button_2.activate();
                     return true;
                 case Gdk.Key.@3:
                 case Gdk.Key.KP_3:
-                    button_3.clicked();
+                    button_3.activate();
                     return true;
                 case Gdk.Key.@4:
                 case Gdk.Key.KP_4:
-                    button_4.clicked();
+                    button_4.activate();
                     return true;
                 case Gdk.Key.@5:
                 case Gdk.Key.KP_5:
-                    button_5.clicked();
+                    button_5.activate();
                     return true;
                 case Gdk.Key.@6:
                 case Gdk.Key.KP_6:
-                    button_6.clicked();
+                    button_6.activate();
                     return true;
                 case Gdk.Key.@7:
                 case Gdk.Key.KP_7:
-                    button_7.clicked();
+                    button_7.activate();
                     return true;
                 case Gdk.Key.@8:
                 case Gdk.Key.KP_8:
-                    button_8.clicked();
+                    button_8.activate();
                     return true;
                 case Gdk.Key.@9:
                 case Gdk.Key.KP_9:
-                    button_9.clicked();
+                    button_9.activate();
                     return true;
                 case Gdk.Key.plus:
                 case Gdk.Key.KP_Add:
-                    button_add.clicked();
+                    button_add.activate();
                     return true;
                 case Gdk.Key.minus:
                 case Gdk.Key.KP_Subtract:
-                    button_sub.clicked();
+                    button_sub.activate();
                     return true;
                 case Gdk.Key.asterisk:
                 case Gdk.Key.KP_Multiply:
-                    button_mult.clicked();
+                    button_mult.activate();
                     return true;
                 case Gdk.Key.slash:
                 case Gdk.Key.KP_Divide:
-                    button_div.clicked();
+                    button_div.activate();
                     return true;
                 case Gdk.Key.period:
                 case Gdk.Key.decimalpoint:
                 case Gdk.Key.KP_Decimal:
-                    button_point.clicked();
+                    button_point.activate();
                     return true;
                 case Gdk.Key.BackSpace:
                 case Gdk.Key.KP_Delete:
-                    button_del.clicked();
+                    button_del.activate();
                     return true;
                 case Gdk.Key.Return:
                 case Gdk.Key.KP_Enter:
                 case Gdk.Key.KP_Equal:
-                    button_calc.clicked();
+                    button_calc.activate();
                     return true;
             }
 
             switch (event.keyval) {
                 case Gdk.Key.percent:
-                    button_percent.clicked();
+                    button_percent.activate();
                     return true;
                 case Gdk.Key.parenleft:
-                    button_par_left.clicked();
+                    button_par_left.activate();
                     return true;
                 case Gdk.Key.parenright:
-                    button_par_right.clicked();
+                    button_par_right.activate();
                     return true;
             }
 
@@ -962,17 +962,17 @@ namespace PantheonCalculator {
                 switch (event.keyval) {
                     case Gdk.Key.Escape:
                         if (control_pressed) {
-                            button_clr.clicked();
+                            button_clr.activate();
                         }
                         return true;
                     case Gdk.Key.e:
-                        button_pow.clicked();
+                        button_pow.activate();
                         return true;
                     case Gdk.Key.p:
-                        button_pi.clicked();
+                        button_pi.activate();
                         return true;
                     case Gdk.Key.r:
-                        button_sr.clicked();
+                        button_sr.activate();
                         return true;
                     case Gdk.Key.C, Gdk.Key.c:
                         if (entry.get_text () != "") {
