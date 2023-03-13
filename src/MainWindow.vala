@@ -91,15 +91,21 @@ namespace PantheonCalculator {
         public struct History { string exp; string output; }
         private double memory_value = 0;
 
-        public const string ACTION_PREFIX = "win.";
-        public const string ACTION_CLEAR = "action-clear";
-        public const string ACTION_INSERT = "action-insert";
-        public const string ACTION_FUNCTION = "action-function";
+        private const string ACTION_PREFIX = "win.";
+        private const string ACTION_CLEAR = "action-clear";
+        private const string ACTION_INSERT = "action-insert";
+        private const string ACTION_FUNCTION = "action-function";
+        private const string ACTION_UNDO = "action-undo";
+        private const string ACTION_COPY = "action-copy";
+        private const string ACTION_PASTE = "action-paste";
 
         private const ActionEntry[] ACTION_ENTRIES = {
             { ACTION_INSERT, action_insert, "s"},
             { ACTION_FUNCTION, action_function, "s"},
-            { ACTION_CLEAR, action_clear }
+            { ACTION_CLEAR, action_clear },
+            { ACTION_UNDO, undo },
+            { ACTION_COPY, copy },
+            { ACTION_PASTE, paste }
         };
 
         static construct {
@@ -112,6 +118,9 @@ namespace PantheonCalculator {
 
             var application_instance = (Gtk.Application) GLib.Application.get_default ();
             application_instance.set_accels_for_action (ACTION_PREFIX + ACTION_CLEAR, {"Escape"});
+            application_instance.set_accels_for_action (ACTION_PREFIX + ACTION_UNDO, {"<Control>z"});
+            application_instance.set_accels_for_action (ACTION_PREFIX + ACTION_COPY, {"<Control>c"});
+            application_instance.set_accels_for_action (ACTION_PREFIX + ACTION_PASTE, {"<Control>v"});
 
             set_resizable (false);
             window_position = Gtk.WindowPosition.CENTER;
@@ -569,6 +578,28 @@ namespace PantheonCalculator {
             }
         }
 
+        private void copy () {
+            if (entry.get_text () != "") {
+                try {
+                    var output = eval.evaluate (entry.get_text (), decimal_places);
+                    entry.set_text (output);
+                } catch (Core.OUT_ERROR e) {
+                    infobar_label.label = e.message;
+                    infobar.revealed = true;
+                }
+            }
+        }
+
+        private void paste () {
+            try {
+                var output = eval.evaluate (clipboard.wait_for_text (), decimal_places);
+                entry.set_text (output);
+            } catch (Core.OUT_ERROR e) {
+                infobar_label.label = e.message;
+                infobar.revealed = true;
+            }
+        }
+
         private void action_insert (SimpleAction action, Variant? variant) {
             var token = variant.get_string ();
             int new_position = entry.get_position ();
@@ -973,26 +1004,6 @@ namespace PantheonCalculator {
                         return true;
                     case Gdk.Key.r:
                         button_sr.activate();
-                        return true;
-                    case Gdk.Key.C, Gdk.Key.c:
-                        if (entry.get_text () != "") {
-                            try {
-                                var output = eval.evaluate (entry.get_text (), decimal_places);
-                                entry.set_text (output);
-                            } catch (Core.OUT_ERROR e) {
-                                infobar_label.label = e.message;
-                                infobar.revealed = true;
-                            }
-                        }
-                        return true;
-                    case Gdk.Key.V, Gdk.Key.v:
-                        try {
-                            var output = eval.evaluate (clipboard.wait_for_text (), decimal_places);
-                            entry.set_text (output);
-                        } catch (Core.OUT_ERROR e) {
-                            infobar_label.label = e.message;
-                            infobar.revealed = true;
-                        }
                         return true;
                     case Gdk.Key.Q, Gdk.Key.q:
                         destroy ();
