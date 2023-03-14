@@ -102,6 +102,7 @@ namespace PantheonCalculator {
         private const ActionEntry[] ACTION_ENTRIES = {
             { ACTION_INSERT, action_insert, "s"},
             { ACTION_FUNCTION, action_function, "s"},
+            { ACTION_CLEAR, action_clear },
             { ACTION_UNDO, undo },
             { ACTION_COPY, copy },
             { ACTION_PASTE, paste }
@@ -116,6 +117,7 @@ namespace PantheonCalculator {
             add_action_entries (ACTION_ENTRIES, this);
 
             var application_instance = (Gtk.Application) GLib.Application.get_default ();
+            application_instance.set_accels_for_action (ACTION_PREFIX + ACTION_CLEAR, {"Escape"});
             application_instance.set_accels_for_action (ACTION_PREFIX + ACTION_UNDO, {"<Control>z"});
             application_instance.set_accels_for_action (ACTION_PREFIX + ACTION_COPY, {"<Control>c"});
             application_instance.set_accels_for_action (ACTION_PREFIX + ACTION_PASTE, {"<Control>v"});
