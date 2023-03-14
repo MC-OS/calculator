@@ -968,7 +968,7 @@ namespace PantheonCalculator {
                 case Gdk.Key.KP_Delete:
                     button_del.activate();
                     return true;
-                case Gdk.Key.Return:
+                case Gdk.Key.equal:
                 case Gdk.Key.KP_Enter:
                 case Gdk.Key.KP_Equal:
                     button_calc.activate();
