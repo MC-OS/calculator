@@ -102,6 +102,7 @@ namespace PantheonCalculator {
         private const ActionEntry[] ACTION_ENTRIES = {
             { ACTION_INSERT, action_insert, "s"},
             { ACTION_FUNCTION, action_function, "s"},
+            { ACTION_CLEAR, action_clear },
             { ACTION_UNDO, undo },
             { ACTION_COPY, copy },
             { ACTION_PASTE, paste }
@@ -116,6 +117,7 @@ namespace PantheonCalculator {
             add_action_entries (ACTION_ENTRIES, this);
 
             var application_instance = (Gtk.Application) GLib.Application.get_default ();
+            application_instance.set_accels_for_action (ACTION_PREFIX + ACTION_CLEAR, {"Escape"});
             application_instance.set_accels_for_action (ACTION_PREFIX + ACTION_UNDO, {"<Control>z"});
             application_instance.set_accels_for_action (ACTION_PREFIX + ACTION_COPY, {"<Control>c"});
             application_instance.set_accels_for_action (ACTION_PREFIX + ACTION_PASTE, {"<Control>v"});
@@ -905,104 +907,93 @@ namespace PantheonCalculator {
             switch (event.keyval) {
                 case Gdk.Key.@0:
                 case Gdk.Key.KP_0:
-                    button_0.activate();
+                    button_0.clicked ();
                     return true;
                 case Gdk.Key.@1:
                 case Gdk.Key.KP_1:
-                    button_1.activate();
+                    button_1.clicked ();
                     return true;
                 case Gdk.Key.@2:
                 case Gdk.Key.KP_2:
-                    button_2.activate();
+                    button_2.clicked ();
                     return true;
                 case Gdk.Key.@3:
                 case Gdk.Key.KP_3:
-                    button_3.activate();
+                    button_3.clicked ();
                     return true;
                 case Gdk.Key.@4:
                 case Gdk.Key.KP_4:
-                    button_4.activate();
+                    button_4.clicked ();
                     return true;
                 case Gdk.Key.@5:
                 case Gdk.Key.KP_5:
-                    button_5.activate();
+                    button_5.clicked ();
                     return true;
                 case Gdk.Key.@6:
                 case Gdk.Key.KP_6:
-                    button_6.activate();
+                    button_6.clicked ();
                     return true;
                 case Gdk.Key.@7:
                 case Gdk.Key.KP_7:
-                    button_7.activate();
+                    button_7.clicked ();
                     return true;
                 case Gdk.Key.@8:
                 case Gdk.Key.KP_8:
-                    button_8.activate();
+                    button_8.clicked ();
                     return true;
                 case Gdk.Key.@9:
                 case Gdk.Key.KP_9:
-                    button_9.activate();
+                    button_9.clicked ();
                     return true;
                 case Gdk.Key.plus:
                 case Gdk.Key.KP_Add:
-                    button_add.activate();
+                    button_add.clicked ();
                     return true;
                 case Gdk.Key.minus:
                 case Gdk.Key.KP_Subtract:
-                    button_sub.activate();
+                    button_sub.clicked ();
                     return true;
                 case Gdk.Key.asterisk:
                 case Gdk.Key.KP_Multiply:
-                    button_mult.activate();
+                    button_mult.clicked ();
                     return true;
                 case Gdk.Key.slash:
                 case Gdk.Key.KP_Divide:
-                    button_div.activate();
+                    button_div.clicked ();
                     return true;
                 case Gdk.Key.period:
                 case Gdk.Key.decimalpoint:
                 case Gdk.Key.KP_Decimal:
-                    button_point.activate();
+                    button_point.clicked ();
                     return true;
                 case Gdk.Key.BackSpace:
                 case Gdk.Key.KP_Delete:
-                    button_del.activate();
+                    button_del.clicked ();
                     return true;
                 case Gdk.Key.equal:
                 case Gdk.Key.KP_Enter:
                 case Gdk.Key.KP_Equal:
-                    button_calc.activate();
+                    button_calc.clicked ();
                     return true;
             }
 
             switch (event.keyval) {
                 case Gdk.Key.percent:
-                    button_percent.activate();
+                    button_percent.clicked ();
                     return true;
                 case Gdk.Key.parenleft:
-                    button_par_left.activate();
+                    button_par_left.clicked ();
                     return true;
                 case Gdk.Key.parenright:
-                    button_par_right.activate();
+                    button_par_right.clicked ();
+                    return true;
+                case Gdk.Key.Escape:
+                    button_clr.clicked ();
                     return true;
             }
 
             if (control_pressed) {
                 switch (event.keyval) {
-                    case Gdk.Key.Escape:
-                        if (control_pressed) {
-                            button_clr.activate();
-                        }
-                        return true;
-                    case Gdk.Key.e:
-                        button_pow.activate();
-                        return true;
-                    case Gdk.Key.p:
-                        button_pi.activate();
-                        return true;
-                    case Gdk.Key.r:
-                        button_sr.activate();
-                        return true;
                     case Gdk.Key.Q, Gdk.Key.q:
                         destroy ();
                         return true;
