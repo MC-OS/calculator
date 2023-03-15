@@ -987,24 +987,13 @@ namespace PantheonCalculator {
                 case Gdk.Key.parenright:
                     button_par_right.activate();
                     return true;
+                case Gdk.Key.Escape:
+                    button_clr.activate();
+                    return true;
             }
 
             if (control_pressed) {
                 switch (event.keyval) {
-                    case Gdk.Key.Escape:
-                        if (control_pressed) {
-                            button_clr.activate();
-                        }
-                        return true;
-                    case Gdk.Key.e:
-                        button_pow.activate();
-                        return true;
-                    case Gdk.Key.p:
-                        button_pi.activate();
-                        return true;
-                    case Gdk.Key.r:
-                        button_sr.activate();
-                        return true;
                     case Gdk.Key.Q, Gdk.Key.q:
                         destroy ();
                         return true;
